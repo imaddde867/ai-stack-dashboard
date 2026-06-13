@@ -4,26 +4,17 @@ Local Prometheus + Grafana for the WSL qwen stack.
 
 ![AI Stack Home Server Grafana dashboard](docs/assets/qwen-dashboard.png)
 
-## Includes
+## Overview
 
-- Grafana dashboard for qwen, GPU, RAM, disk, and load
-- `qwen_exporter.py` for WSL and NVIDIA metrics on `127.0.0.1:9108`
-- `qwen_control.py` for Start/Stop/Restart on `127.0.0.1:9110`
+- Grafana for qwen, GPU, RAM, disk, and load
+- `qwen_exporter.py` on `127.0.0.1:9108`
+- `qwen_control.py` on `127.0.0.1:9110`
 - Prometheus scrape and alert rules
-- systemd user units for dashboard autostart
+- systemd user units for WSL autostart
 
-The exporter does not export prompts, responses, API keys, or request bodies.
+The exporter stays read-only and does not export prompts, responses, API keys, or request bodies.
 
-## What It Shows
-
-- qwen health, loading state, PID, uptime, and log hints
-- llama-server metrics from `/metrics` and `/slots`
-- RTX VRAM, GPU utilization, temperature, power, and clocks
-- WSL RAM, swap, load average, and disk usage for `/` and `/mnt/c`
-
-## Start
-
-Install the user units once:
+## Setup
 
 ```bash
 mkdir -p ~/.config/systemd/user
@@ -31,15 +22,11 @@ cp systemd/qwen-dashboard.service ~/.config/systemd/user/
 cp systemd/qwen-exporter.service ~/.config/systemd/user/
 cp systemd/qwen-control.service ~/.config/systemd/user/
 systemctl --user daemon-reload
-```
-
-Start the dashboard stack:
-
-```bash
 systemctl --user enable --now qwen-dashboard qwen-exporter qwen-control
+systemctl --user disable qwen
 ```
 
-If you want qwen itself running too:
+If you want qwen inference running too:
 
 ```bash
 qwenctl restart
@@ -53,15 +40,6 @@ Open:
 - Exporter metrics: `http://127.0.0.1:9108/metrics`
 
 Grafana login is `admin` / `admin` with anonymous viewer access on localhost.
-
-## Autostart
-
-```bash
-systemctl --user disable qwen
-```
-
-This keeps Grafana, Prometheus, the exporter, and the control UI starting with WSL.
-It leaves qwen inference disabled until you start it manually.
 
 ## Qwen Control
 
