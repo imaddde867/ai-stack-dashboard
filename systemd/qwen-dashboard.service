@@ -1,0 +1,15 @@
+[Unit]
+Description=Qwen dashboard Prometheus and Grafana containers
+After=network-online.target docker.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/home/imad/projects/ai-stack-dashboard
+ExecStart=/usr/bin/docker compose up -d
+ExecStop=/usr/bin/docker compose stop
+RemainAfterExit=yes
+TimeoutStartSec=180
+
+[Install]
+WantedBy=default.target
