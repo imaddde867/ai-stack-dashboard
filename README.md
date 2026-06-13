@@ -21,6 +21,7 @@ The exporter does not export prompts, responses, API keys, or request bodies.
 - `grafana/dashboards/qwen-stack.json` is provisioned automatically.
 - `systemd/qwen-exporter.service` is an optional user service.
 - `systemd/qwen-control.service` is an optional user service for Start/Stop/Restart.
+- `systemd/qwen-dashboard.service` starts the Prometheus/Grafana containers at WSL login.
 
 ## Start
 
@@ -53,15 +54,19 @@ Open:
 
 Grafana login is `admin` / `admin`, with anonymous viewer access enabled on localhost.
 
-## Optional Exporter Service
+## Autostart Dashboard
 
 ```bash
 mkdir -p ~/.config/systemd/user
 cp systemd/qwen-exporter.service ~/.config/systemd/user/
 cp systemd/qwen-control.service ~/.config/systemd/user/
+cp systemd/qwen-dashboard.service ~/.config/systemd/user/
 systemctl --user daemon-reload
-systemctl --user enable --now qwen-exporter qwen-control
+systemctl --user enable --now qwen-dashboard qwen-exporter qwen-control
+systemctl --user disable qwen
 ```
+
+This starts only Grafana, Prometheus, the metrics exporter, and the control UI when your WSL user session starts. It does not start the qwen inference service.
 
 ## Qwen Control
 
