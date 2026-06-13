@@ -2,6 +2,8 @@
 
 Local Prometheus + Grafana dashboard for the WSL qwen/llama-server stack.
 
+![AI Stack Home Server Grafana dashboard](docs/assets/qwen-dashboard.png)
+
 ## What It Watches
 
 - qwen health, loading state, PID, uptime, log size, recent warning/error hints
