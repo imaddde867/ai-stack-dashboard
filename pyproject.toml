@@ -1,0 +1,9 @@
+[project]
+name = "ai-stack-dashboard"
+version = "0.1.0"
+description = "Local Prometheus/Grafana dashboard and exporter for the WSL qwen llama-server stack."
+requires-python = ">=3.12"
+dependencies = []
+
+[tool.uv]
+package = false

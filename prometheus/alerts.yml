@@ -1,0 +1,58 @@
+groups:
+  - name: qwen_stack
+    rules:
+      - alert: QwenLlamaHealthDown
+        expr: qwen_llama_health_up == 0 and qwen_llama_loading == 0
+        for: 30s
+        labels:
+          severity: critical
+        annotations:
+          summary: qwen llama-server health is down
+
+      - alert: QwenModelLoadingSlow
+        expr: qwen_llama_loading == 1
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: qwen model has been loading for more than 10 minutes
+
+      - alert: QwenHighVramUsage
+        expr: qwen_gpu_memory_used_percent > 95
+        for: 30s
+        labels:
+          severity: warning
+        annotations:
+          summary: GPU VRAM usage is above 95%
+
+      - alert: QwenHighGpuTemperature
+        expr: qwen_gpu_temperature_celsius > 82
+        for: 30s
+        labels:
+          severity: warning
+        annotations:
+          summary: GPU temperature is above 82C
+
+      - alert: QwenLowSystemMemory
+        expr: qwen_system_memavailable_bytes < 2147483648
+        for: 30s
+        labels:
+          severity: warning
+        annotations:
+          summary: WSL available memory is below 2 GiB
+
+      - alert: QwenWindowsDiskNearlyFull
+        expr: qwen_disk_used_percent{path="/mnt/c"} > 95
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: /mnt/c is above 95% disk usage
+
+      - alert: QwenContextNearlyFull
+        expr: qwen_llama_slot_context_used_percent > 90
+        for: 30s
+        labels:
+          severity: warning
+        annotations:
+          summary: llama-server slot context is above 90%
