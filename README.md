@@ -1,27 +1,27 @@
-# Rigel — AI Stack Dashboard
+# AI Stack Home Server Dashboard
 
-Local Prometheus + Grafana monitoring for the WSL Qwen/llama-server stack.
+Local Prometheus + Grafana monitoring for the WSL qwen/llama-server stack.
 
-![Rigel AI Stack Dashboard](docs/assets/qwen-dashboard.png)
+![AI Stack Home Server Dashboard](docs/assets/qwen-dashboard.png)
 
 ## What it shows
 
-**Status bar (top)** — 8 always-visible stats: server state (UP / LOADING / DOWN), VRAM used, VRAM free, GPU utilization, GPU temperature, GPU power draw, context window fill, system RAM.
+**Status bar (top):** 8 always-visible stats: server state (UP / LOADING / DOWN), VRAM used, VRAM free, GPU utilization, GPU temperature, GPU power draw, context window fill, system RAM.
 
 **Graphs:**
-- **VRAM** — used bytes vs. total (reference line), auto-scales to GB
-- **GPU activity** — utilization % on left axis, temperature on right axis (dual scale, no overlap)
-- **Context window** — context fill % over time, shows session start/end and context resets
-- **System memory** — RAM % and swap % on a shared 0–100% axis
+- **VRAM:** used bytes vs. total (reference line), auto-scales to GB
+- **GPU activity:** utilization % on left axis, temperature on right axis (dual scale, no overlap)
+- **Context window:** context fill % over time, shows session start/end and context resets
+- **System memory:** RAM % and swap % on a shared 0-100% axis
 
-**Bottom row** — server uptime, disk gauges for `/` and `C:`, GPU power sparkline, control panel button.
+**Bottom row:** server uptime, disk gauges for `/` and `C:`, GPU power sparkline, control panel button.
 
 ## Stack
 
-- `qwen_exporter.py` on `127.0.0.1:9108` — scrapes nvidia-smi, /proc, llama-server /health and /slots
-- `qwen_control.py` on `127.0.0.1:9110` — start/stop/restart UI
-- Prometheus on `127.0.0.1:9090` — 5s scrape interval, 15d retention
-- Grafana on `127.0.0.1:3000` — auto-provisioned dashboard, anonymous viewer access
+- `qwen_exporter.py` on `127.0.0.1:9108` -- scrapes nvidia-smi, /proc, llama-server /health and /slots
+- `qwen_control.py` on `127.0.0.1:9110` -- start/stop/restart UI
+- Prometheus on `127.0.0.1:9090` -- 5s scrape interval, 15d retention
+- Grafana on `127.0.0.1:3000` -- auto-provisioned dashboard, anonymous viewer access
 
 The exporter is read-only. It does not export prompts, responses, API keys, or request bodies.
 
