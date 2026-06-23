@@ -642,7 +642,9 @@
           "thresholds": {
             "mode": "absolute",
             "steps": [
-              { "color": "text", "value": null }
+              { "color": "red",     "value": null  },
+              { "color": "#EAB308", "value": 300   },
+              { "color": "green",   "value": 3600  }
             ]
           }
         },
@@ -651,20 +653,20 @@
       "gridPos": { "h": 4, "w": 4, "x": 0, "y": 18 },
       "id": 13,
       "options": {
-        "colorMode": "none",
+        "colorMode": "background",
         "graphMode": "none",
         "justifyMode": "center",
         "orientation": "auto",
         "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
         "showPercentChange": false,
-        "textMode": "value_and_name",
+        "textMode": "auto",
         "wideLayout": true
       },
       "pluginVersion": "12.3.0",
       "targets": [
         {
           "expr": "qwen_process_uptime_seconds",
-          "legendFormat": "Uptime",
+          "legendFormat": "",
           "refId": "A"
         }
       ],
@@ -832,5 +834,5 @@
   "timezone": "browser",
   "title": "AI Stack",
   "uid": "qwen-stack",
-  "version": 4
+  "version": 5
 }
