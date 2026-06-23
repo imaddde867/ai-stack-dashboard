@@ -2,7 +2,7 @@
 
 Local Prometheus + Grafana monitoring for the WSL qwen/llama-server stack.
 
-![AI Stack Home Server Dashboard](docs/assets/qwen-dashboard.png)
+![AI Stack Home Server Dashboard](docs/assets/dashboard.png)
 
 ## What it shows
 
