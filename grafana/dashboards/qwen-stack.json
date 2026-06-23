@@ -636,15 +636,13 @@
       "datasource": { "type": "prometheus", "uid": "Prometheus" },
       "fieldConfig": {
         "defaults": {
-          "color": { "mode": "thresholds" },
+          "color": { "mode": "fixed", "fixedColor": "text" },
           "unit": "dtdurations",
           "noValue": "offline",
           "thresholds": {
             "mode": "absolute",
             "steps": [
-              { "color": "red",     "value": null  },
-              { "color": "#EAB308", "value": 300   },
-              { "color": "green",   "value": 3600  }
+              { "color": "text", "value": null }
             ]
           }
         },
@@ -653,7 +651,7 @@
       "gridPos": { "h": 4, "w": 4, "x": 0, "y": 18 },
       "id": 13,
       "options": {
-        "colorMode": "background",
+        "colorMode": "none",
         "graphMode": "none",
         "justifyMode": "center",
         "orientation": "auto",
@@ -834,5 +832,5 @@
   "timezone": "browser",
   "title": "AI Stack",
   "uid": "qwen-stack",
-  "version": 5
+  "version": 6
 }
